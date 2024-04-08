@@ -1,7 +1,11 @@
+'use client'
+
 import React from 'react'
 
 import { sidebarLinks } from '@/constants'
 import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
+import { Link } from 'lucide-react'
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -10,6 +14,19 @@ const Sidebar = () => {
       <div className='flex flex-flex-col gap-6'>
         {sidebarLinks.map((link) => {
           const isActive = pathname === link.route || pathname.startsWith(link.route);
+
+          return (
+            <Link
+               href={link.route}
+               key={link.label}
+               className={cn('flex gap-4 items-center p-4 rounded-lg justify-start', {
+                'bg-blue-1' : isActive,
+               })}
+            >
+              {link.label}
+
+            </Link>
+          )
           
         })}
         
